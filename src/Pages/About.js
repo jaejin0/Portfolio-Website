@@ -1,3 +1,9 @@
+// skills
+// education
+// relavant coursework
+// personal info
+// certificate (intel AI certificate & aggie research program)
+
 function About() {
     return (
         <div className="container">
@@ -10,7 +16,7 @@ function About() {
                             <div>Education</div>
                             <div>Computer Science '24 @ Texas A&M University</div>
                             <div>B.S. in Computer Science | minor in Mathematics</div>
-                            <div>gpa: 3.3</div>
+                            <div>gpa: 3.4</div>
                         </div>
                         <div>
                             <div>Relavant Courseworks</div>

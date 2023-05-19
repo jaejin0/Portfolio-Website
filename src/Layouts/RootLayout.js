@@ -20,6 +20,7 @@ function Header() {
           <div className='col btn-group btn-group-toggle' data-toggle="buttons">
             <NavLink className='btn btn-secondary active' to='/'>Home</NavLink>
             <NavLink className='btn btn-secondary' to='/about'>About</NavLink>
+            <NavLink className='btn btn-secondary' to='/experiences'>Experiences</NavLink>
             <NavLink className='btn btn-secondary' to='/projects'>Projects</NavLink>
           </div>
         </div>

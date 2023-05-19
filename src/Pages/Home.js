@@ -13,8 +13,6 @@ function Home() {
                     <div className="row py-5 w-100">
                         <NavLink className='btn btn-secondary active' to='/about'>Resume</NavLink>
                         <NavLink className='btn btn-secondary active' to='/projects'>Projects</NavLink>
-                       <button className="col mx-5 btn btn-primary">Resume</button>
-                       <button className="col mx-3 btn btn-primary">Projects</button>
                     </div>
                 </div>
                 <div className="col w-25">
