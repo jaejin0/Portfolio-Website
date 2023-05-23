@@ -1,23 +1,15 @@
 require('dotenv').config()
 
 const express = require('express')
-const { ObjectId } = require('mongodb')
-const { connectToDb, getDb } = require('./db')
-const workoutRoutes = require('./routes/workouts')
+const mongoose = require('mongoose')
+
+const homeRoutes = require('./routes/home')
+const aboutRoutes = require('./routes/about')
+const experienceRoutes = require('./routes/experiences')
+const projectRoutes = require('./routes/projects')
 
 // express app
 const app = express()
-
-// db connection
-let db
-connectToDb((err) => {
-    if (!err) {
-        app.listen(process.env.PORT, () => {
-            console.log('listening on port 4000')
-        })
-        db = getDb()
-    }
-})
 
 // middleware
 app.use(express.json())
@@ -28,90 +20,19 @@ app.use((req, res, next) => {
 })
 
 // routes
-// app.use('/api/workouts', workoutRoutes)
+app.use('/api/home', homeRoutes)
+app.use('/api/about', aboutRoutes)
+app.use('/api/experiences', experienceRoutes)
+app.use('/api/projects', projectRoutes)
 
-app.get('/', (req, res) => {
-
-    db.collection('home')
-        .findOne()
-        .then(doc => {
-            res.status(200).json(doc)
+// connect to db
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => {
+        console.log('connected to database')
+        app.listen(process.env.PORT, () => {
+            console.log('listening on port', process.env.PORT)
         })
-        .catch(() => {
-            res.status(500).json({error: "Could not fetch the documents"})
-        })
-})
-
-
-app.get('/about', (req, res) => {
-
-    db.collection('about')
-        .findOne()
-        .then(doc => {
-            res.status(200).json(doc)
-        })
-        .catch(() => {
-            res.status(500).json({error: "Could not fetch the documents"})
-        })
-})
-
-app.get('/experiences', (req, res) => {
-    let experiences = []
-
-    db.collection('experiences')
-        .find()
-        .sort({ startDate: -1 })
-        .forEach(exp => experiences.push(exp))
-        .then(() => {
-            res.status(200).json(experiences)
-        })
-        .catch(() => {
-            res.status(500).json({error: "Could not fetch the documents"})
-        })
-})
-app.get('/experiences/:id', (req, res) => {
-    
-    if (ObjectId.isValid(req.params.id)) {
-        db.collection('experiences')
-            .findOne({_id: new ObjectId(req.params.id)})
-            .then(doc => {
-                res.status(200).json(doc)
-            })
-            .catch(err => {
-                res.status(500).json({error: "Could not fetch the documents"})
-            })
-    } else {
-        res.status(500).json({error: "Not a valid doc id"})
-    }
-
-    
-})
-app.get('/projects', (req, res) => {
-    let projects = []
-
-    db.collection('projects')
-        .find()
-        .sort({ startDate: -1 })
-        .forEach(proj => projects.push(proj))
-        .then(() => {
-            res.status(200).json(projects)
-        })
-        .catch(() => {
-            res.status(500).json({error: "Could not fetch the documents"})
-        })
-})
-app.get('/projects/:id', (req, res) => {
-
-    if (ObjectId.isValid(req.params.id)) {
-        db.collection('projects')
-            .findOne({_id: new ObjectId(req.params.id)})
-            .then(doc => {
-                res.status(200).json(doc)
-            })
-            .catch(err => {
-                res.status(500).json({error: "Could not fetch the documents"})
-            })
-    } else {
-        res.status(500).json({error: "Not a valid doc id"})
-    }
-})
+    })
+    .catch((error) => {
+        console.log(error)
+    })
