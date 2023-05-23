@@ -11,6 +11,7 @@ function About() {
                 <div className="col">Image</div>
                 <div className="col">
                     <div>Jaejin Cha</div>
+                    <div>email: jaejin0109@gmail.com</div>
                     <div>
                         <div>
                             <div>Education</div>

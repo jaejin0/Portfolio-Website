@@ -2,6 +2,22 @@
 
 This website shows my skillsets via projects.
 
+## versions used for this project
+
+
+node: v18.16.0
+npm: 9.5.1
+react: ^18.2.0
+express: ^4.18.2
+MongoDB: ^5.5.0
+
+## to start
+
+1. git clone this repository on your machine
+2. go to the local repository
+3. run "npm install" to install all package needed
+4. run "npm start" to start the app
+
 ## format of the website
 
 In the portfolio website, you can find:
