@@ -3,10 +3,10 @@ const { getExperiences, getExperience } = require('../controllers/experienceCont
 
 const router = express.Router()
 
-// GET all projects
+// GET all experiences
 router.get('/', getExperiences)
 
-// GET a single project
+// GET a single experience
 router.get('/:id', getExperience)
 
 module.exports = router

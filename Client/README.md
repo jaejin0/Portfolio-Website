@@ -8,8 +8,6 @@ This website shows my skillsets via projects.
 node: v18.16.0
 npm: 9.5.1
 react: ^18.2.0
-express: ^4.18.2
-MongoDB: ^5.5.0
 
 ## to start
 

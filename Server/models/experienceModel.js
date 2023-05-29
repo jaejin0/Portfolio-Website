@@ -1,16 +1,19 @@
 const mongoose = require('mongoose')
-require('mongoose-type-url')
+//require('mongoose-type-url')
 
 const Schema = mongoose.Schema
 
 const experienceSchema = new Schema({
+    header: {
+        type: String
+    },
+    company: {
+        type: String
+    },
     title: {
         type: String
     },
     desc : {
-        type: String
-    },
-    role : {
         type: String
     },
     date : {
@@ -20,16 +23,15 @@ const experienceSchema = new Schema({
     skills : [{
         type: String
     }],
-    img : {
+    mainImage : {
         data: Buffer,
         contentType: String
     },
     details : {
-        images : {
-            img1: { date: Buffer, contentType: String },
-            img2: { date: Buffer, contentType: String },
-            img3: { date: Buffer, contentType: String }
-        },
+        images : [{
+            data: Buffer, 
+            contentType: String
+        }],
         articles : {
             situation : { type: String },
             task : { type: String },
@@ -37,11 +39,13 @@ const experienceSchema = new Schema({
             result : { type: String }
         },
         links : {
-            github : mongoose.SchemaTypes.Url,
-            relevant : [mongoose.SchemaTypes.Url]
+            github : { type: String },
+            relevantLinks : [{
+                type: String
+            }]
         }
         
     }
-})
+}, { collection: 'experiences'})
 
 module.exports = mongoose.model('Experience', experienceSchema)

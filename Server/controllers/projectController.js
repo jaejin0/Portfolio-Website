@@ -3,9 +3,9 @@ const mongoose = require('mongoose')
 
 // get all projects
 const getProjects = async (req, res) => {
-    const projects = await Project.find({
-        title: 1, desc: 1, date: 1, skills: 1, img: 1
-    }).sort({ startDate: -1 })
+    const projects = await Project.find({}, {
+        details: 0
+    }).sort({ start: -1 })
 
     res.status(200).json(projects)
 }

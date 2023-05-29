@@ -1,24 +1,35 @@
+import useFetch from '../Fetch/useFetch'
 import { NavLink } from 'react-router-dom'
+
+import Pending from '../Fetch/Pending'
+import Error from '../Fetch/Error'
 
 function Home() {
 
+    const { data, isPending, error } = useFetch('/api/home')
+
     return (
-        <div className="container py-5">
-            <div className="row">
-                <div className="col w-75">
-                    Hello my name is Jaejin Cha. I am a software engineer.
-                    I am a senior computer science student at Texas A&M University.
-                    I am interested in Autonomous driving, Artificial Intelligence, and Data Engineering.
-                    I am using this website to build my portfolio of my work.
-                    <div className="row py-5 w-100">
-                        <NavLink className='btn btn-secondary active' to='/about'>Resume</NavLink>
-                        <NavLink className='btn btn-secondary active' to='/projects'>Projects</NavLink>
-                    </div>
-                </div>
-                <div className="col w-25">
-                    right-side-image
-                </div>
+        <div>
+            { isPending && <Pending/> }
+            { error && <Error err={ error }/>}
+            { data && <HomeContent data={ data }/>}
+        </div>
+    )
+}
+
+function HomeContent(props) {
+
+    const home = props.data
+
+    return (
+        <div>
+            <div>
+                { home.intent }
+                { home.curPosition }
             </div>
+            <NavLink className='btn btn-secondary active' to='/about'>Resume</NavLink>
+            <NavLink className='btn btn-secondary active' to='/projects'>Projects</NavLink>
+            right-side-image
         </div>
     )
 }

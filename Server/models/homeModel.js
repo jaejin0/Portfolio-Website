@@ -9,6 +9,6 @@ const homeSchema = new Schema({
     intent : {
         type: String
     }
-})
+}, { collection: 'home'})
 
 module.exports = mongoose.model('Home', homeSchema)

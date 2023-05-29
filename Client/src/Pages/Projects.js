@@ -1,33 +1,53 @@
-// projects and hackathon
-// 310 db project, first personal website project, memory game, acc project, 2 hackathon projects
-
-import tempImg from '../logo.svg'
+import useFetch from '../Fetch/useFetch'
 import { Link } from 'react-router-dom'
 
-function Projects(props) {
-    // props is a list of JSON that contains all projects
+import Pending from '../Fetch/Pending'
+import Error from '../Fetch/Error'
 
-    const projList = [
-        { id: 1, name: "proj1", subhead: "My First Project!", image: {tempImg}, desc: "description", date:"05/15/2023 - 05/30/2023", link: "Here is the link to the github", skills: "skill1 skill2 skill3"}
-    ]
+function Projects() {
+    
+    const { data, isPending, error } = useFetch('/api/projects')
+
+    return (
+        <div>
+            { isPending && <Pending/> }
+            { error && <Error err={ error }/>}
+            { data && <ProjectsContent data={ data }/>}
+        </div>
+    )    
+}
+
+function ProjectsContent(props) {
+
+    const projects = props.data
+
+    const projectsSkills = new Map()
+    for (let i = 0; i < projects.length; i++) {
+        const skills = []
+        for (let j = 0; j < projects[i].skills.length; j++) {
+            skills.push(
+                <ul>{ projects[i].skills[j] }</ul>
+            )
+        }
+        projectsSkills.set(projects[i]._id, skills)
+    }
 
     return (
         <div>
             <div>
-                Here are my { projList.length } projects
+                Here are my { projects.length } projects
             </div>
             <div>
-                {projList.map((proj) => (
-                    <div key={proj.id}>
-                        <Link to={`/projects/${proj.id}`}>
-                            <img src={ proj.image } className='img-thumbnail w-`100'></img>
-                            <div>{ proj.name }</div>
-                            <div>{ proj.subhead }</div>
+                {projects.map((proj) => (
+                    <div key={proj._id}>
+                        <Link to={`/projects/${proj._id}`}>
+                            <img src={ proj.mainImage } className='img-thumbnail w-`100'></img>
+                            <div>{ proj.title }</div>
                             <div>{ proj.desc }</div>
-                            <div>{ proj.link }</div>
-                            <div>{ proj.date }</div>
+                            <div>{ proj.date.start }</div>
+                            <div>{ proj.date.end }</div>
                             <div>
-                                <div>{ proj.skills}</div>
+                                <div>{ projectsSkills.get(proj._id) }</div>
                             </div>
                         </Link>
                     </div>

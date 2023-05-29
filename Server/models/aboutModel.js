@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const aboutSchema = new Schema({
-    img : {
+    image : {
         data: Buffer,
         contentType: String
     },
@@ -16,12 +16,15 @@ const aboutSchema = new Schema({
     languages : [{
         type: String
     }],
-    skills : [{
+    frameworks : [{
+        type: String
+    }],
+    tools : [{
         type: String
     }],
     certificates : [{
         type: String
     }]
-})
+}, { collection: 'about'})
 
 module.exports = mongoose.model('About', aboutSchema)

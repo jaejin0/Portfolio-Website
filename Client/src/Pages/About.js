@@ -1,42 +1,86 @@
-// skills
-// education
-// relavant coursework
-// personal info
-// certificate (intel AI certificate & aggie research program)
+import useFetch from '../Fetch/useFetch'
+import { NavLink } from 'react-router-dom'
 
-function About() {
+import Pending from '../Fetch/Pending'
+import Error from '../Fetch/Error'
+
+function About(props) {
+
+    const { data, isPending, error } = useFetch('/api/about')
+
     return (
-        <div className="container">
+        <div>
+            { isPending && <Pending/> }
+            { error && <Error err={ error }/>}
+            { data && <AboutContent data={ data }/>}
+        </div>
+    )
+}
+
+function AboutContent(props) {
+
+    const about = props.data
+
+    const courseworks = []
+    for (let i = 0; i < about.courseworks.length; i++) {
+        courseworks.push(
+            <ul>{ about.courseworks[i] }</ul>
+        )
+    }
+    const languages = []
+    for (let i = 0; i < about.languages.length; i++) {
+        languages.push(
+            <ul>{ about.languages[i] }</ul>
+        )
+    }
+    const frameworks = []
+    for (let i = 0; i < about.frameworks.length; i++) {
+        frameworks.push(
+            <ul>{ about.frameworks[i] }</ul>
+        )
+    }
+    const tools = []
+    for (let i = 0; i < about.tools.length; i++) {
+        tools.push(
+            <ul>{ about.tools[i] }</ul>
+        )
+    }
+    const certificates = []
+    for (let i = 0; i < about.certificates.length; i++) {
+        certificates.push(
+            <ul>{ about.certificates[i] }</ul>
+        )
+    }
+
+    return (
+        <div>
             <div className="row">
-                <div className="col">Image</div>
+                <div className="col">{ about.image }</div>
                 <div className="col">
                     <div>Jaejin Cha</div>
-                    <div>email: jaejin0109@gmail.com</div>
                     <div>
                         <div>
-                            <div>Education</div>
-                            <div>Computer Science '24 @ Texas A&M University</div>
-                            <div>B.S. in Computer Science | minor in Mathematics</div>
-                            <div>gpa: 3.4</div>
+                            <h2>Education</h2>
+                            <div>Texas A&M University '24</div>
+                            <div>Bachelor of Science, Major in Computer Science, Minor in Mathematics</div>
+                            <div>GPA: { about.gpa }</div>
                         </div>
                         <div>
-                            <div>Relavant Courseworks</div>
-                            <div>Computer Systems</div>
-                            <div>Database Systems</div>
+                            <h4>Relavant Courseworks</h4>
+                            <div>{ courseworks }</div>
                         </div>
                         <div>
-                            <div>Research</div>
-                            <div>Autonomous Driving Vehicles (Prof. Weisong Shi)</div>
-                            <div>Big Data Systems (Prof. Khanh Nguyen)</div>
-                            <div>Graph Mining Systems (Prof. Khanh Nguyen)</div>
+                            <h3>Certificates</h3>
+                            <div>{ certificates }</div>
                         </div>
                         <div>
-                            <div>Skills</div>
-                            <div>Java, Python, C++, JavaScript</div>
-                            <div>React.js, Node.js, Git, Apache Spark, HDFS, Bootstrap</div>
+                            <h3>Technical Skills</h3>
+                            <div>{ languages }</div>
+                            <div>{ frameworks }</div>
+                            <div>{ tools }</div>
                         </div>
                     </div>
-                    <div>View Resume in PDF</div>
+                    <NavLink className='btn btn-secondary active' target="_blank" to='/resume'>View Resume in PDF</NavLink>
                 </div>
             </div>
         </div>
