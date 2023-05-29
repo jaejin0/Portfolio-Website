@@ -1,0 +1,1 @@
+This is a portfolio website using MERN Stack and deployed on AWS
