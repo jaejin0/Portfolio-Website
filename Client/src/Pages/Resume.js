@@ -1,4 +1,4 @@
-import resumePDF from "../Images/JaejinCha_Resume.pdf"
+import resumePDF from "../Assets/JaejinCha_Resume.pdf"
 
 function Resume() {
 

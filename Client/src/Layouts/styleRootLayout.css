@@ -1,0 +1,67 @@
+/* Header */
+
+header {
+    background-color: rgb(35,48,68);
+    overflow: hidden;
+    width: 100%;
+    padding-bottom: 5vh;
+}
+
+header .logo {
+    float: left;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+header .navbar {
+    float: right;
+}
+
+header .navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+header .navbar ul li {
+    display: inline;
+}
+
+header .navLink {
+    color: white;
+    text-decoration: none;
+}
+
+
+/* footer */
+
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(6, 17, 25);
+    overflow: hidden;
+}
+
+footer nav .navLink {
+    float: left;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+}
+
+footer ul {
+    float: right;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.item {
+    display: inline;
+}
+
+footer .icon {
+    width: 20px;
+}

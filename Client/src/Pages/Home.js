@@ -4,6 +4,10 @@ import { NavLink } from 'react-router-dom'
 import Pending from '../Fetch/Pending'
 import Error from '../Fetch/Error'
 
+import './HomeStyle.css'
+
+import image from '../Assets/team_building.svg'
+
 function Home() {
 
     const { data, isPending, error } = useFetch('/api/home')
@@ -23,13 +27,18 @@ function HomeContent(props) {
 
     return (
         <div>
-            <div>
-                { home.intent }
-                { home.curPosition }
+            <div className='content'>
+                <div className='text'>
+                    <h1>It's nice to meet you.</h1>
+                    { home.curPosition }
+                    { home.intent }
+                </div>
+                <nav>
+                    <NavLink className='btn btn-secondary active' to='/about'>Resume</NavLink>
+                    <NavLink className='btn btn-secondary active' to='/projects'>Projects</NavLink>
+                </nav>
             </div>
-            <NavLink className='btn btn-secondary active' to='/about'>Resume</NavLink>
-            <NavLink className='btn btn-secondary active' to='/projects'>Projects</NavLink>
-            right-side-image
+            <img src={ image }></img>
         </div>
     )
 }

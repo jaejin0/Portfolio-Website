@@ -1,0 +1,29 @@
+.content {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+
+    padding-top: 15vh;
+    padding-bottom: 25vh;
+
+    background-color: gray;
+}
+
+.box {
+    background-color: white;
+    padding: 10vh 0 10vh 0;
+    margin: 0 10vw 0 10vw;
+    overflow: hidden;
+}
+
+.message {
+    color: rgb(255, 53, 53);
+    text-decoration: underline;
+    font-size: 6vh;
+}
+
+.error {
+    color: red;
+    font-size: 8vh;
+    padding: 2%;
+}
